@@ -1,0 +1,6 @@
+target
+deployment
+.DS_Store
+*~
+*.swp
+classpath.txt

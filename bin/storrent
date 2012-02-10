@@ -1,0 +1,3 @@
+#!/bin/bash
+LAUNCHJAR=~/.storrent/storrent-0.4.one-jar.jar
+exec java -jar $LAUNCHJAR com.submarinerich.storrent.TorrentClient "$@"

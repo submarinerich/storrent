@@ -1,0 +1,95 @@
+
+![](http://cdn.submarinerich.com/images/storrent.png)
+
+---
+
+*Storrent* is a *Scala* library for dealing with *BitTorrent*.
+
+It's made so you can embed it in whatever application you'd like, get [scrape](http://en.wikipedia.org/wiki/Tracker_scrape) count for Torrents (see how popular they are), and download torrent files.
+
+The library, when compiled, can also be used as a command line *Bittorrent Client* ( in the fashion of [rtorrent](http://libtorrent.rakshasa.no/) or [ctorrent](http://www.rahul.net/dholmes/ctorrent/) )
+
+---
+## Examples ##
+
+## Metainfo 
+
+To get a Torrent metainfo:
+
+    import com.submarinerich.storrent.Torrent
+
+    var t = Torrent.fromURL("http://releases.ubuntu.com/11.10/ubuntu-11.10-server-amd64.iso.torrent")
+
+    Console.log("Torrent Name"+t.name)
+
+    Console.log("Torrent cread by "+t.createdBy)
+
+    Console.log("info hash "+t.info_hash_hex)
+
+    for( tracker <- t.announceList )
+      Console.log(" tracker: "+tracker)
+
+    for( file <- t.files )
+      Console.log(" file: "+file)
+
+You can also get a torrent from a local file:
+
+    var t = Torrent.fromFile("Downloads/localUbuntuTorrent.torrent")
+
+## Programmatic Downloading ##
+
+To download (programmatically):
+
+    import com.submarinerich.storrent.{Torrent,TorrentClient}
+
+    def displayUpdate( f : Double ) : Unit = log.info("percentage downloaded: "+"%03.02f".format(f)+"% (of 100%) ")
+
+    var t = Torrent.fromURL("http://releases.ubuntu.com/11.10/ubuntu-11.10-server-amd64.iso.torrent")
+
+    var downloadingTo = "download/"
+
+    var tc = new TorrentClient(t.get)(downloadingTo)
+
+    tc.download(displayUpdate)
+
+    tc.cleanupResources
+
+
+## Scraping ##
+
+As a [scraper](http://en.wikipedia.org/wiki/Tracker_scrape) :
+
+    see src/test/scala/TrackerScrapeTestSuite.scala:24
+    for now it's a little more complicated than the others and requires netty/a thread sleep
+
+
+## Command Line ##
+
+To download (via command line)
+
+first install (assumes macports, [maven](http://maven.apache.org/download.html), rake, scala29)
+
+    sudo rake install
+
+then run:
+
+    storrent http://releases.ubuntu.com/11.10/ubuntu-11.10-server-amd64.iso.torrent ~/Downloads/
+
+
+## Features
+
+  * resumes competently
+  * embedded [ostrich](https://github.com/twitter/ostrich) server to watch the internals (it runs on http://localhost:9000/report/ while you're downloading)
+
+## Known Issues ##
+
+  * No seeding (yet).  
+  * It's a little slower than I'd like, but it's still in alpha.
+
+## Roadmap
+
+  * Seeding
+  * DHT Bittorrent Protocol Extension Implementation
+  * Location Aware Protocol Extension Implementation
+
+
