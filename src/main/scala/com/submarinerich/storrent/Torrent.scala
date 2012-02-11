@@ -50,7 +50,7 @@ trait Hashable
 		var md  : MessageDigest = MessageDigest.getInstance("SHA-1")
 		md.update(data);
 		md.digest()
-	}
+	} 
 }
 
 object Torrent extends Hashable
@@ -162,20 +162,21 @@ object Torrent extends Hashable
 
     var source : Array[Byte] = Array()
     
+    log.info("attempting request")
+    var parts = urlstring.split("/")
+    var filename = parts( parts.size - 1)
+    var urlStart = urlstring.replace(filename,"")
+    var fullurl = urlStart + java.net.URLEncoder.encode(filename)
+    
     try{
-    	log.info("attempting request")
-    	var parts = urlstring.split("/")
-    	var filename = parts( parts.size - 1)
-      var urlStart = urlstring.replace(filename,"")
-      var fullurl = urlStart + java.net.URLEncoder.encode(filename)
       var request = new HttpGet(fullurl)
       var future = httpclient.execute(request,null)
-      var response = future.get()
-      if( response.getStatusLine().getStatusCode() == 200 )
-        source = IOUtils.toByteArray(response.getEntity().getContent()) 
+      var response = future.get
+      if( response.getStatusLine.getStatusCode == 200 )
+        source = IOUtils.toByteArray(response.getEntity.getContent)
     }catch{
       case e : Exception => log.warn("problem! : "+e)
-      case _ => log.error(" something else!")
+      case _ => log.error("Request Failed, not an Exception")
     }finally{
       httpclient.shutdown()
     }

@@ -1,10 +1,72 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.submarinerich</groupId>
   <artifactId>storrent_$SCALAVERSION</artifactId>
   <version>$VERSION</version>
-  <name>storrent</name>
+  <description>A BitTorrent Library for Scala</description>
+  <url>http://github.com/submarinerich/storrent</url>
+  <packaging>jar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest</artifactId>
+      <version>1.6.1</version>
+      <!-- 1.5.1 is 2.8, 1.6.1 is 2.9 and above -->
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.10-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpasyncclient</artifactId>
+      <version>4.0-alpha3</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.clapper</groupId>
+      <artifactId>grizzled-slf4j_$SCALAVERSION</artifactId>
+      <version>0.6.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.6.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.netty</groupId>
+      <artifactId>netty</artifactId>
+      <version>3.2.7.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>com.twitter</groupId>
+      <artifactId>ostrich_$SCALAVERSION</artifactId>
+      <!-- for 2.8.1. just ostrich -->
+      <version>4.10.2</version>
+      <!-- <scope>test</scope> -->
+    </dependency>
+    <dependency>
+      <groupId>com.twitter</groupId>
+      <artifactId>util-core_$SCALAVERSION</artifactId>
+      <!-- for 2.8.1, just util-core  -->
+      <version>1.12.12</version>
+      <!-- for 2.8.1 only tested with 1.12.9 -->
+    </dependency>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-compiler</artifactId>
+      <version>$SCALAVERSION</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
   <repositories>
     <repository>
       <id>SubmarineRich Repo</id>
